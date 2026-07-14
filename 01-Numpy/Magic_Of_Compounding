@@ -1,1 +1,32 @@
+import numpy as np
 
+# 5 सालों के लिए तुम्हारा हर साल का इन्वेस्टमेंट (₹ में)
+investment_amounts = np.array([100000, 100000, 100000, 100000, 100000])
+
+# अगले 5 सालों का अनुमानित सालाना रिटर्न (Rate of Return - 12% यानी 0.12)
+roi_rates = np.array([0.12, 0.12, 0.12, 0.12, 0.12])
+
+# अगले 5 सालों की अनुमानित महंगाई दर (Inflation Rate - 6% यानी 0.06)
+inflation_rates = np.array([0.06, 0.06, 0.06, 0.06, 0.06])
+
+net_rates = roi_rates - inflation_rates
+
+print(net_rates)
+
+current_amount = 0
+
+for i in range(len(investment_amounts)):
+   current_amount += investment_amounts[i] + ((investment_amounts[i] + current_amount) * net_rates[i])
+   print(f"{i+1} YEAR AMOUNT: {current_amount}")
+
+print(f"investment_amounts is ₹{np.sum(investment_amounts)}")
+print(f"after 5 years amount is ₹{current_amount}")
+     
+[0.06 0.06 0.06 0.06 0.06]
+1 YEAR AMOUNT: 106000.0
+2 YEAR AMOUNT: 218360.0
+3 YEAR AMOUNT: 337461.6
+4 YEAR AMOUNT: 463709.296
+5 YEAR AMOUNT: 597531.85376
+investment_amounts is ₹500000
+after 5 years amount is ₹597531.85376
